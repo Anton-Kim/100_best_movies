@@ -27,6 +27,10 @@ python -m pip install --upgrade pip
 ```
 pip install -r requirements.txt
 ```
+Перейти в папку best_movies, содержащую файл manage.py:
+```
+cd best_movies/
+```
 Создать и запустить миграции:
 ```
 python manage.py makemigrations
@@ -34,7 +38,7 @@ python manage.py makemigrations
 ```
 python manage.py migrate
 ```
-Запустить проект на локальной машине или на сервере из папки best_movies, содержащей файл manage.py:
+Запустить проект на локальной машине или на сервере:
 ```
 python manage.py runserver
 ```
