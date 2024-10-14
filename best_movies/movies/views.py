@@ -2,6 +2,8 @@ from django.shortcuts import redirect, render
 from .models import LastRefresh, Movie
 from .funcs import load_films
 
+#тесты
+#всё по заданию
 
 def index(request):
     """Выгрузка в шаблон 100 лучших фильмов и времени последнего обновления этого списка"""
