@@ -3,7 +3,7 @@ from django.db import models
 
 class Movie(models.Model):
     """Модель для фильмов, вклюячающая картинку"""
-    poster = models.ImageField(upload_to='', default='default.jpg')
+    poster = models.ImageField(upload_to='')
     name = models.CharField(max_length=500)
     director = models.CharField(max_length=300, blank=True)
     year = models.CharField(max_length=4, blank=True)
@@ -22,4 +22,4 @@ class LastRefresh(models.Model):
         hour = int(self.time.strftime('%H'))
         msk_timezone_hour = ((list(range(3, 24)) + [0, 1, 2])[hour])
         tmp = self.time.strftime(':%M:%S, %d.%m.%y г.')
-        return '(' + str(msk_timezone_hour) + tmp + ')'
+        return '(обновлено ' + str(msk_timezone_hour) + tmp + ')'

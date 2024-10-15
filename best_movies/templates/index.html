@@ -20,7 +20,7 @@
         <div class="container">
             <h5>Лучшие 100 фильмов по версии <span style="color:#F5C518">IMDb</span>{% if is_last_refresh %} {{ last_refresh.text }}{% endif %}</h5>
             <form action="{% url 'refresh' %}">
-                <input class="btn btn-warning" type="submit" value="Обновить"/>
+                <input class="btn btn-warning" type="submit" value="Загрузить фильмы"/>
             </form>
             {% if movies %}
             <table class="table">
@@ -44,6 +44,8 @@
                 </tr>
                 {% endfor %}
                 </tbody>
+                {% elif error %}
+                {{ error }}
                 {% elif not movies %}
                 Рейтинг фильмов пока не обновлялся
                 {% else %}

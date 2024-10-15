@@ -15,7 +15,6 @@ def load_films():
     data = requests.get(url, headers=headers)
     for movie in re.findall(r'item _NO_HIGHLIGHT_([\s\S]*?)myVote', data.text):
         poster_url = re.search(r'src=\"(.*?)\" title=\"/ima', movie).group(1)
-        # name = re.search(r'class=\"name\">([\s\S]*?)</a>', movie).group(1).split('">')[1].replace('  ', ' ').replace('&nbsp;', ' ')
         name = re.search(r'class=\"name\">([\s\S]*?)</a>', movie).group(1).split('">')[1].replace('&nbsp;', ' ')
         try_director = re.search(r'реж.([\s\S]*?)</a>', movie)
         director = try_director.group(1).split('">')[1] if try_director else ''
@@ -24,7 +23,6 @@ def load_films():
         year = str_year.split(' ')[0] if str_year else ''
         genre = re.search(r'\((.*?)\)', re.search(r'<br([\s\S]*?)</span>', movie).group(1)).group(1)
         rating = float(re.search(r'IMDb: (.*?)<span>', movie).group(1))
-        # print(name, director, genre, year, rating, poster_url)
         if Movie.objects.filter(name=name).exists():
             m = Movie.objects.get(name=name)
             m.rating = rating

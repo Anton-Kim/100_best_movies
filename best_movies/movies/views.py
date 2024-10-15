@@ -2,8 +2,6 @@ from django.shortcuts import redirect, render
 from .models import LastRefresh, Movie
 from .funcs import load_films
 
-#тесты
-#всё по заданию
 
 def index(request):
     """Выгрузка в шаблон 100 лучших фильмов и времени последнего обновления этого списка"""
@@ -16,7 +14,11 @@ def index(request):
 
 def refresh(request):
     """Парсинг фильмов, обновление последнего времени обновления"""
-    load_films()
+    try:
+        load_films()
+    except Exception as error:
+        context = {'error': f'Ошибка при попытке загрузки фильмов: {error}'}
+        return render(request, 'index.html', context)
     is_last_refresh = LastRefresh.objects.filter(id=1).exists()
     if is_last_refresh:
         LastRefresh.objects.filter(id=1).delete()
